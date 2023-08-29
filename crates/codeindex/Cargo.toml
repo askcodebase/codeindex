@@ -11,6 +11,7 @@ tokio = { version = "1.32.0", features = ["full"] }
 axum = "0.6.20"
 serde = { version = "1.0.188", features = ["derive"] }
 serde_json = "1.0.105"
+redis = { version = "0.23.2", features = [ "cluster-async", "tokio-comp" ] }
 tree-sitter = "0.20.10"
 tree-sitter-rust = "0.20.4"
 tree-sitter-python = "0.20.4"
