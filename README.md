@@ -5,7 +5,7 @@ CodeIndex is a local-first high performance codebase index engine designed for A
 ## Features
 
 - **🔐 Privacy first:** All data is stored locally on your machine.
-- **🚀 High performance:** Indexing a middle codebase takes less than 1 second.
+- **🚀 High performance:** Indexing a normal codebase takes in seconds.
 - **🤖 AI ready:** The index is designed for AI, which means it's easy to provide codebase context to your LLM.
 - **⏰ Real-time:** The index is designed to be real-time. It can update indexes while you are typing.
 - **⚙️ Configurable:** The index is designed to be configurable. You can customize the engine to fit your needs.
