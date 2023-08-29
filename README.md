@@ -1,6 +1,6 @@
 # CodeIndex
 
-CodeIndex is a local-first high performance codebase index engine designed for AI. It helps your LLM understanding the structure and semantics of a codebase and correct context based on the inputs.
+CodeIndex is a local-first high performance codebase index engine designed for AI. It helps your LLM understanding the structure and semantics of a codebase and grabs code context based on the inputs.
 
 ## Features
 
@@ -62,14 +62,19 @@ const symbols = await codeIndex.querySymbol('main.py', {
     character: 1,
   },
 })
-
-// Query a code symbol by path and range
 ```
 
-####
+
+## Concepts
+
+1. [ctags](https://github.com/universal-ctags/ctags)
+2. LSP (Language Server Protocol)
+3. [tree-sitter](https://github.com/tree-sitter/tree-sitter/tree/master)
 
 ## Acknowledgement
 
 1. [Sweep AI](https://github.com/sweepai/sweep) Sweep: AI-powered Junior Developer for small features and bug fixes.
 2. [SourceGraph](https://github.com/sourcegraph/sourcegraph) Code AI platform with Code Search & Cody
 3. [LLamaIndex](https://github.com/jerryjliu/llama_index) LlamaIndex (GPT Index) is a data framework for your LLM applications
+4. [aider](https://github.com/paul-gauthier/aider) aider is AI pair programming in your terminal
+    - [Improving GPT-4’s codebase understanding with ctags](https://aider.chat/docs/ctags.html)
