@@ -7,4 +7,5 @@ use qdrant::start_qdrant;
 /// This CLI starts a CodeIndex peer/server.
 fn main() {
     let _ = start_qdrant();
+    log::info!("CodeIndex server stopped");
 }
