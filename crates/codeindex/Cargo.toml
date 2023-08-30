@@ -7,6 +7,7 @@ edition = "2021"
 cc = "*"
 
 [dependencies]
+colored = "2.0.4"
 tokio = { version = "1.32.0", features = ["full"] }
 axum = "0.6.20"
 serde = { version = "1.0.188", features = ["derive"] }
