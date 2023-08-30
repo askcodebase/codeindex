@@ -7,6 +7,7 @@ CodeIndex is a local-first high performance codebase index engine designed for A
 ### Install Dependencies
 
 ```bash
+rustup component add rustfmt
 brew install protobuf
 cargo install cargo-watch
 ```

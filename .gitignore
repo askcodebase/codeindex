@@ -1,5 +1,10 @@
 test_projects
+
+# cargo
 crates/target
 /target
+
+# qdrant
 .qdrant-initialized
 storage
+snapshots

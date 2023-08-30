@@ -3,19 +3,17 @@ use std::env;
 use atty::Stream;
 use colored::{Color, ColoredString, Colorize};
 
-use crate::settings::Settings;
-
 fn paint(text: &str, true_color: bool) -> ColoredString {
     if true_color {
-        text.bold().truecolor(184, 20, 56)
+        text.bold().truecolor(70, 144, 239)
     } else {
-        text.bold().color(Color::Red)
+        text.bold().color(Color::Blue)
     }
 }
 
 /// Prints welcome message
 #[rustfmt::skip]
-pub fn welcome(settings: &Settings) {
+pub fn welcome() {
     if !atty::is(Stream::Stdout) {
         colored::control::set_override(false);
     }
@@ -29,22 +27,11 @@ pub fn welcome(settings: &Settings) {
         Err(_) => true_color = false,
     }
 
-    println!("{}", paint(r#"           _                 _    "#, true_color));
-    println!("{}", paint(r#"  __ _  __| |_ __ __ _ _ __ | |_  "#, true_color));
-    println!("{}", paint(r#" / _` |/ _` | '__/ _` | '_ \| __| "#, true_color));
-    println!("{}", paint(r#"| (_| | (_| | | | (_| | | | | |_  "#, true_color));
-    println!("{}", paint(r#" \__, |\__,_|_|  \__,_|_| |_|\__| "#, true_color));
-    println!("{}", paint(r#"    |_|                           "#, true_color));
-    println!();
-    let ui_link = format!(
-        "http{}://localhost:{}/dashboard",
-        if settings.service.enable_tls { "s" } else { "" },
-        settings.service.http_port
-    );
-
-    println!("{} {}",
-             "Access web UI at".truecolor(134, 186, 144),
-             ui_link.bold().underline().truecolor(82, 139, 183));
+    println!("{}", paint(r#"  _________     _________    ________      _________            "#, true_color));
+    println!("{}", paint(r#"  __  ____/___________  /________  _/____________  /________  __"#, true_color));
+    println!("{}", paint(r#"  _  /    _  __ \  __  /_  _ \__  / __  __ \  __  /_  _ \_  |/_/"#, true_color));
+    println!("{}", paint(r#"  / /___  / /_/ / /_/ / /  __/_/ /  _  / / / /_/ / /  __/_>  <  "#, true_color));
+    println!("{}", paint(r#"  \____/  \____/\__,_/  \___//___/  /_/ /_/\__,_/  \___//_/|_|  "#, true_color));
     println!();
 }
 
@@ -54,6 +41,6 @@ mod tests {
 
     #[test]
     fn test_welcome() {
-        welcome(&Settings::new(None).unwrap());
+        welcome();
     }
 }

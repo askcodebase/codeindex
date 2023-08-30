@@ -124,7 +124,7 @@ fn main() -> anyhow::Result<()> {
     segment::madvise::set_global(settings.storage.mmap_advice);
     segment::vector_storage::common::set_async_scorer(settings.storage.async_scorer);
 
-    welcome(&settings);
+    welcome();
 
     if let Some(recovery_warning) = &settings.storage.recovery_mode {
         log::warn!("Qdrant is loaded in recovery mode: {}", recovery_warning);

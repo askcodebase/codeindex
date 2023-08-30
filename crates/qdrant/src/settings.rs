@@ -242,12 +242,12 @@ impl Settings {
         }
 
         let env = env::var("RUN_MODE").unwrap_or_else(|_| "development".into());
-        let config_path_env = format!("config/{env}");
+        let config_path_env = format!("crates/qdrant/config/{env}");
 
         // Report error if main or env config files exist, report warning if not
         // Check if main and env configuration file
         load_errors.extend(
-            ["config/config", &config_path_env]
+            ["crates/qdrant/config/config", &config_path_env]
                 .into_iter()
                 .filter(|path| !config_exists(path))
                 .map(|path| LogMsg::Warn(format!("Config file not found: {path}"))),
