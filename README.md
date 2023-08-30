@@ -1,6 +1,6 @@
 # CodeIndex
 
-CodeIndex is a local-first high performance codebase index engine designed for AI. It helps your LLM understanding the structure and semantics of a codebase and grabs code context based on the inputs.
+CodeIndex is a local-first high performance codebase index engine designed for AI. It helps your LLM understand the structure and semantics of a codebase and grab code context when needed.
 
 ## Features
 
