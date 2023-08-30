@@ -2,17 +2,19 @@
 name = "codeindex"
 version = "0.1.0"
 edition = "2021"
+default-run = "codeindex"
 
 [build-dependencies]
 cc = "*"
 
 [dependencies]
+qdrant = { path = "../qdrant" }
 colored = "2.0.4"
 tokio = { version = "~1.29", features = ["full"] }
 axum = "0.6.20"
 serde = { version = "1.0.188", features = ["derive"] }
 serde_json = "1.0.105"
-redis = { version = "0.23.2", features = [ "cluster-async", "tokio-comp" ] }
+redis = { version = "0.23.2", features = ["cluster-async", "tokio-comp"] }
 tree-sitter = "0.20.10"
 tree-sitter-rust = "0.20.4"
 tree-sitter-python = "0.20.4"

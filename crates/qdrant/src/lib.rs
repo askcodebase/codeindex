@@ -106,7 +106,7 @@ struct Args {
     disable_telemetry: bool,
 }
 
-fn main() -> anyhow::Result<()> {
+pub fn start_qdrant() -> anyhow::Result<()> {
     tracing::setup()?;
 
     remove_started_file_indicator();

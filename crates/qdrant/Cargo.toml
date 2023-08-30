@@ -10,7 +10,6 @@ homepage = "https://qdrant.tech/"
 repository = "https://github.com/qdrant/qdrant"
 license = "Apache-2.0"
 edition = "2021"
-default-run = "qdrant"
 
 [features]
 default = ["web", "parking_lot"]
@@ -31,8 +30,6 @@ serde_urlencoded = "0.7"
 sealed_test = "1.0.0"
 
 tempfile = "3.7.1"
-rusty-hook = "^0.11.2"
-
 
 [dependencies]
 
