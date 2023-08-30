@@ -4,6 +4,15 @@ CodeIndex is a local-first high performance codebase index engine designed for A
 
 ## Development
 
+### Install Dependencies
+
+```bash
+brew install protobuf
+cargo install cargo-watch
+```
+
+### Run
+
 ```bash
 cargo watch -x run
 ```

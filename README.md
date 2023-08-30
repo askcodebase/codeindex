@@ -78,3 +78,7 @@ const symbols = await codeIndex.querySymbol('main.py', {
 3. [LLamaIndex](https://github.com/jerryjliu/llama_index) LlamaIndex (GPT Index) is a data framework for your LLM applications
 4. [aider](https://github.com/paul-gauthier/aider) aider is AI pair programming in your terminal
     - [Improving GPT-4’s codebase understanding with ctags](https://aider.chat/docs/ctags.html)
+
+## License
+
+See [Elastic License 2.0].

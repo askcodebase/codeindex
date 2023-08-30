@@ -1,2 +1,5 @@
 test_projects
 crates/target
+/target
+.qdrant-initialized
+storage

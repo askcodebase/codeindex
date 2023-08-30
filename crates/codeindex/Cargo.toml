@@ -8,7 +8,7 @@ cc = "*"
 
 [dependencies]
 colored = "2.0.4"
-tokio = { version = "1.32.0", features = ["full"] }
+tokio = { version = "~1.29", features = ["full"] }
 axum = "0.6.20"
 serde = { version = "1.0.188", features = ["derive"] }
 serde_json = "1.0.105"
