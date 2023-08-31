@@ -17,3 +17,10 @@ cargo install cargo-watch
 ```bash
 cargo watch -x run
 ```
+
+### Lint
+
+```bash
+cargo fmt
+cargo clippy
+```
