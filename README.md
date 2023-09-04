@@ -1,6 +1,6 @@
 # CodeIndex
 
-CodeIndex is a local-first high performance codebase index engine designed for AI. It helps your LLM understand the structure and semantics of a codebase and grab code context when needed. CodexIndex is built on top of [qdrant](https://github.com/qdrant/qdrant), a high performance vector database written in Rust.
+CodeIndex is a local-first high performance codebase index engine designed for AI. It helps your LLM understand the structure and semantics of a codebase and grab code context when needed. CodexIndex is built on top of [qdrant](https://github.com/qdrant/qdrant), an open source vector database written in rust.
 
 ## Features
 
