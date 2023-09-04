@@ -111,4 +111,4 @@ const symbols = await codeIndex.querySymbol('main.py', {
 
 ## License
 
-See [Elastic License 2.0].
+See [Elastic License 2.0](./LICENSE).
