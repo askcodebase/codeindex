@@ -10,6 +10,36 @@ CodeIndex is a local-first high performance codebase index engine designed for A
 - **⏰ Real-time:** The index is designed to be real-time. It can update indexes while you are typing.
 - **⚙️ Configurable:** The index is designed to be configurable. You can customize the engine to fit your needs.
 
+## Preview
+
+```bash
+[2023-09-04T10:21:20.246Z INFO  storage::content_manager::consensus::persistent] Loading raft state from ./storage/raft_state.json
+[2023-09-04T10:21:20.248Z DEBUG storage::content_manager::consensus::persistent] State: Persistent { state: RaftState { hard_state: HardState { term: 0, vote: 0, commit: 0 }, conf_state: ConfState { voters: [7252149026178447], learners: [], voters_outgoing: [], learners_next: [], auto_leave: false } }, latest_snapshot_meta: SnapshotMetadataSer { term: 0, index: 0 }, apply_progress_queue: EntryApplyProgressQueue(None), peer_address_by_id: RwLock { data: {} }, this_peer_id: 7252149026178447, path: "./storage/raft_state.json", dirty: false }
+[2023-09-04T10:21:20.251Z INFO  qdrant] Distributed mode disabled
+[2023-09-04T10:21:20.251Z INFO  qdrant] Telemetry reporting enabled, id: 865ffc9a-a8e2-48b7-97f9-d62131d1ae77
+[2023-09-04T10:21:20.251Z DEBUG qdrant] Waiting for thread web to finish
+[2023-09-04T10:21:20.251Z INFO  qdrant::tonic] Qdrant gRPC listening on 6334
+[2023-09-04T10:21:20.251Z INFO  qdrant::tonic] TLS disabled for gRPC API
+[2023-09-04T10:21:20.252Z INFO  qdrant::actix] TLS disabled for REST API
+[2023-09-04T10:21:20.252Z INFO  qdrant::actix] Qdrant HTTP listening on 6333
+[2023-09-04T10:21:20.252Z INFO  actix_server::builder] starting 5 workers
+[2023-09-04T10:21:20.252Z INFO  actix_server::server] Actix runtime found; starting in Actix runtime
+[2023-09-04T10:21:20.254Z DEBUG reqwest::connect] starting new connection: https://staging-telemetry.qdrant.io/
+[2023-09-04T10:21:20.254Z DEBUG reqwest::connect] proxy(http://127.0.0.1:7890) intercepts 'https://staging-telemetry.qdrant.io/'
+[2023-09-04T10:21:20.254Z DEBUG hyper::client::connect::http] connecting to 127.0.0.1:7890
+[2023-09-04T10:21:20.254Z DEBUG hyper::client::connect::http] connected to 127.0.0.1:7890
+[2023-09-04T10:21:20.255Z DEBUG rustls::client::hs] No cached session for DnsName("staging-telemetry.qdrant.io")
+[2023-09-04T10:21:20.255Z DEBUG rustls::client::hs] Not resuming any session
+[2023-09-04T10:21:20.773Z DEBUG rustls::client::hs] ALPN protocol is Some(b"h2")
+[2023-09-04T10:21:20.773Z DEBUG rustls::client::hs] Using ciphersuite TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
+[2023-09-04T10:21:20.773Z DEBUG rustls::client::tls12::server_hello] Server supports tickets
+[2023-09-04T10:21:20.773Z DEBUG rustls::client::tls12] ECDHE curve is ECParameters { curve_type: NamedCurve, named_group: secp256r1 }
+[2023-09-04T10:21:20.773Z DEBUG rustls::client::tls12] Server DNS name is DnsName("staging-telemetry.qdrant.io")
+[2023-09-04T10:21:20.992Z DEBUG hyper::client::pool] pooling idle connection for ("https", staging-telemetry.qdrant.io)
+[2023-09-04T10:21:21.259Z DEBUG rustls::common_state] Sending warning alert CloseNotify
+[2023-09-04T10:21:21.259Z INFO codeindex] Indexing: / 538188 files, 1438298 Symbols, 52G ... \
+```
+
 ## APIs
 
 ### Javascript/Typescript SDK
