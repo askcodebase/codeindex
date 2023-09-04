@@ -8,3 +8,4 @@ edition = "2021"
 [dependencies]
 
 atty = "0.2"
+git2 = "0.18.0"

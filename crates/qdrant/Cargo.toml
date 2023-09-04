@@ -107,22 +107,3 @@ name = "wal_inspector"
 path = "src/wal_inspector.rs"
 test = false
 bench = false
-
-[profile.release]
-lto = "fat"
-
-# Inherit from release, because we are not rebuilding often,
-# and we don't want the huge binary sizes from debug builds.
-[profile.ci]
-inherits = "release"
-lto = false
-opt-level = 0
-
-[profile.bench]
-lto = false
-
-# Profile for performance testing, which is faster to build than release.
-[profile.perf]
-inherits = "release"
-lto = false
-opt-level = 3

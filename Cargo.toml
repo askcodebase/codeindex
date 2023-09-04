@@ -5,3 +5,22 @@ members = ["crates/codeindex", "crates/codeindex_common", "crates/qdrant"]
 [patch.crates-io]
 # Temporary patch until <https://github.com/hyperium/tonic/pull/1401> is merged
 tonic = { git = 'https://github.com/qdrant/tonic', branch = "v0.9.2-patched" }
+
+[profile.release]
+lto = "fat"
+
+# Inherit from release, because we are not rebuilding often,
+# and we don't want the huge binary sizes from debug builds.
+[profile.ci]
+inherits = "release"
+lto = false
+opt-level = 0
+
+[profile.bench]
+lto = false
+
+# Profile for performance testing, which is faster to build than release.
+[profile.perf]
+inherits = "release"
+lto = false
+opt-level = 3
