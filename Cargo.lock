@@ -1021,6 +1021,7 @@ version = "0.1.0"
 dependencies = [
  "axum",
  "cc",
+ "codeindex_common",
  "colored",
  "log",
  "qdrant",
@@ -1038,6 +1039,9 @@ dependencies = [
 [[package]]
 name = "codeindex_common"
 version = "0.1.0"
+dependencies = [
+ "atty",
+]
 
 [[package]]
 name = "collection"
@@ -3535,7 +3539,6 @@ dependencies = [
  "actix-web-validator",
  "anyhow",
  "api",
- "atty",
  "chrono",
  "clap",
  "collection",

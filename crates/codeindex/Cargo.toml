@@ -9,6 +9,7 @@ cc = "*"
 
 [dependencies]
 qdrant = { path = "../qdrant" }
+codeindex_common = { path = "../codeindex_common" }
 colored = "2.0.4"
 tokio = { version = "~1.29", features = ["full"] }
 axum = "0.6.20"

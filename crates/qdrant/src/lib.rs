@@ -4,7 +4,6 @@
 mod actix;
 mod common;
 mod consensus;
-mod greeting;
 mod migrations;
 mod settings;
 mod snapshots;
@@ -39,7 +38,6 @@ use crate::common::helpers::{
 };
 use crate::common::telemetry::TelemetryCollector;
 use crate::common::telemetry_reporting::TelemetryReporter;
-use crate::greeting::welcome;
 use crate::migrations::single_to_cluster::handle_existing_collections;
 use crate::settings::Settings;
 use crate::snapshots::{recover_full_snapshot, recover_snapshots};
@@ -123,8 +121,6 @@ pub fn start_qdrant() -> anyhow::Result<()> {
 
     segment::madvise::set_global(settings.storage.mmap_advice);
     segment::vector_storage::common::set_async_scorer(settings.storage.async_scorer);
-
-    welcome();
 
     if let Some(recovery_warning) = &settings.storage.recovery_mode {
         log::warn!("Qdrant is loaded in recovery mode: {}", recovery_warning);
