@@ -1,5 +1,8 @@
 # CodeIndex
 
+> [!WARNING]  
+> This repository is deprecated. We closed source this product and focus on end-to-end user experience by shipping our products directly to end users.
+
 CodeIndex is a local-first high performance codebase index engine designed for AI. It helps your LLM understand the structure and semantics of a codebase and grab code context when needed. CodexIndex is built on top of [qdrant](https://github.com/qdrant/qdrant), an open source vector database written in rust.
 
 ## Features
