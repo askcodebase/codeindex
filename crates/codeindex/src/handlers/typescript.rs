@@ -40,18 +40,27 @@ fn handle_ts_function(cursor: &mut tree_sitter::TreeCursor, source_code: &str) -
 }
 
 // Handler for TypeScript class_declaration
-fn handle_ts_class(cursor: &mut tree_sitter::TreeCursor, source_code: &str) -> String {
+fn handle_ts_class(cursor: &mut TreeCursor, source_code: &str) -> String {
     let mut class_signature = String::new();
     if cursor.goto_first_child() {
         loop {
             let node = cursor.node();
-            if node.kind() == "identifier" {
-                let start_byte = node.start_byte();
-                let end_byte = node.end_byte();
-                let child_name = &source_code[start_byte..end_byte];
-                class_signature.push_str(&format!("class {} {{", child_name));
+            match node.kind() {
+                "class" => {
+                    let start_byte = node.start_byte();
+                    let end_byte = node.end_byte();
+                    let keyword = &source_code[start_byte..end_byte];
+                    class_signature.push_str(keyword);
+                    class_signature.push(' ');
+                }
+                "type_identifier" => {
+                    let start_byte = node.start_byte();
+                    let end_byte = node.end_byte();
+                    let child_name = &source_code[start_byte..end_byte];
+                    class_signature.push_str(child_name);
+                }
+                _ => {}
             }
-            // You may want to handle fields, methods, etc. here...
 
             if !cursor.goto_next_sibling() {
                 break;
@@ -59,7 +68,6 @@ fn handle_ts_class(cursor: &mut tree_sitter::TreeCursor, source_code: &str) -> S
         }
         cursor.goto_parent();
     }
-    class_signature.push_str("}");
     class_signature
 }
 
