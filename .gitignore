@@ -10,3 +10,5 @@ crates/target
 .qdrant-initialized
 storage
 snapshots
+
+.DS_Store
