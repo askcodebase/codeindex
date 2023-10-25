@@ -49,9 +49,10 @@ fn process_entry(entry: ignore::DirEntry) -> Result<(), Box<dyn Error>> {
                     return Ok(()); // Ignore other file types
                 }
 
+                let extension = path.extension().and_then(std::ffi::OsStr::to_str);
                 let tree = parser.parse(&code, None).unwrap();
                 let root_node = tree.root_node();
-                let outline = get_outline(root_node, &code);
+                let outline = get_outline(root_node, &code, extension);
                 for signature in outline {
                     println!("  {}", signature);
                 }
@@ -76,7 +77,7 @@ fn get_language(extension: Option<&str>) -> Option<tree_sitter::Language> {
     }
 }
 
-fn get_outline(node: Node, source_code: &str) -> Vec<String> {
+fn get_outline(node: Node, source_code: &str, extension: Option<&str>) -> Vec<String> {
     let mut signatures = Vec::new();
 
     if node.kind() == "source_file" {
@@ -86,7 +87,7 @@ fn get_outline(node: Node, source_code: &str) -> Vec<String> {
                 let child_kind = cursor.node().kind();
 
                 // Lookup the handler for this kind of node
-                if let Some(handler) = get_handler(child_kind) {
+                if let Some(handler) = get_handler(child_kind, extension.unwrap_or("")) {
                     let signature = handler(&mut cursor, source_code);
                     signatures.push(signature);
                 }
@@ -99,7 +100,7 @@ fn get_outline(node: Node, source_code: &str) -> Vec<String> {
     }
 
     for child in node.children(&mut node.walk()) {
-        let mut child_signatures = get_outline(child, source_code);
+        let mut child_signatures = get_outline(child, source_code, extension);
         signatures.append(&mut child_signatures);
     }
 
@@ -107,13 +108,133 @@ fn get_outline(node: Node, source_code: &str) -> Vec<String> {
 }
 
 // This function returns a function that can handle nodes of the given kind
-fn get_handler(kind: &str) -> Option<fn(&mut tree_sitter::TreeCursor, &str) -> String> {
-    match kind {
-        "function_item" => Some(handle_function),
-        "struct_item" => Some(handle_struct),
-        // Add more cases here as needed
+fn get_handler(
+    kind: &str,
+    extension: &str,
+) -> Option<fn(&mut tree_sitter::TreeCursor, &str) -> String> {
+    match extension {
+        "js" | "jsx" => {
+            match kind {
+                "function_declaration" => Some(handle_js_function),
+                // Add more JavaScript-specific handlers here as needed
+                _ => None,
+            }
+        }
+        "ts" | "tsx" => {
+            match kind {
+                "function_declaration" => Some(handle_ts_function),
+                "class_declaration" => Some(handle_ts_class),
+                // Add more TypeScript-specific handlers here as needed
+                _ => None,
+            }
+        }
+        "py" => {
+            // Add Python-specific handlers here
+            None
+        }
+        "rs" => {
+            match kind {
+                "function_item" => Some(handle_function),
+                "struct_item" => Some(handle_struct),
+                // Add more Rust-specific handlers here as needed
+                _ => None,
+            }
+        }
         _ => None,
     }
+}
+
+// Handler for TypeScript function_declaration
+fn handle_ts_function(cursor: &mut tree_sitter::TreeCursor, source_code: &str) -> String {
+    let mut function_signature = String::new();
+    if cursor.goto_first_child() {
+        loop {
+            let node = cursor.node();
+            match node.kind() {
+                "identifier" => {
+                    let start_byte = node.start_byte();
+                    let end_byte = node.end_byte();
+                    let child_name = &source_code[start_byte..end_byte];
+                    function_signature.push_str(&format!("function {}", child_name));
+                }
+                "formal_parameters" => {
+                    let start_byte = node.start_byte();
+                    let end_byte = node.end_byte();
+                    let parameters = &source_code[start_byte..end_byte];
+                    function_signature.push_str(&format!("{}", parameters));
+                }
+                "type_annotation" => {
+                    let start_byte = node.start_byte();
+                    let end_byte = node.end_byte();
+                    let return_type = &source_code[start_byte..end_byte];
+                    function_signature.push_str(&format!(": {}", return_type));
+                }
+                _ => {}
+            }
+
+            if !cursor.goto_next_sibling() {
+                break;
+            }
+        }
+        cursor.goto_parent();
+    }
+    function_signature
+}
+
+// Handler for TypeScript class_declaration
+fn handle_ts_class(cursor: &mut tree_sitter::TreeCursor, source_code: &str) -> String {
+    let mut class_signature = String::new();
+    if cursor.goto_first_child() {
+        loop {
+            let node = cursor.node();
+            if node.kind() == "identifier" {
+                let start_byte = node.start_byte();
+                let end_byte = node.end_byte();
+                let child_name = &source_code[start_byte..end_byte];
+                class_signature.push_str(&format!("class {} {{", child_name));
+            }
+            // You may want to handle fields, methods, etc. here...
+
+            if !cursor.goto_next_sibling() {
+                break;
+            }
+        }
+        cursor.goto_parent();
+    }
+    class_signature.push_str("}");
+    class_signature
+}
+
+// Handler for JavaScript function_declaration
+fn handle_js_function(cursor: &mut tree_sitter::TreeCursor, source_code: &str) -> String {
+    let mut function_signature = String::new();
+    if cursor.goto_first_child() {
+        loop {
+            let node = cursor.node();
+            match node.kind() {
+                "identifier" => {
+                    let start_byte = node.start_byte();
+                    let end_byte = node.end_byte();
+                    let child_name = &source_code[start_byte..end_byte];
+                    function_signature.push_str(&format!("function {}", child_name));
+                }
+                "formal_parameters" => {
+                    let start_byte = node.start_byte();
+                    let end_byte = node.end_byte();
+                    let parameters = &source_code[start_byte..end_byte];
+                    function_signature.push_str(&format!("{}", parameters));
+                }
+                // JavaScript doesn't have explicit return types, so we don't handle that here
+                _ => {}
+            }
+
+            if !cursor.goto_next_sibling() {
+                break;
+            }
+        }
+        cursor.goto_parent();
+    }
+    function_signature
 }
 
 // Handler for function_item
