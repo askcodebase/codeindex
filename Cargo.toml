@@ -3,7 +3,10 @@ resolver = "2"
 members = ["crates/codeindex"]
 
 [profile.release]
-lto = "fat"
+strip = true
+opt-level = "z" # Optimize for size.
+lto = true # Enable Link Time Optimization (LTO)
+codegen-units = 1
 
 # Inherit from release, because we are not rebuilding often,
 # and we don't want the huge binary sizes from debug builds.

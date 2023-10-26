@@ -1,0 +1,19 @@
+{
+    "name": "@askcodebase/codeindex",
+    "version": "0.1.0",
+    "description": "A module for using codeindex in a Node project",
+    "main": "lib/index.js",
+    "typings": "lib/index.d.ts",
+    "repository": {
+      "type": "git",
+      "url": "https://github.com/jipitiai/codeindex.git"
+    },
+    "scripts": {
+      "postinstall": "node ./lib/postinstall.js"
+    },
+    "author": "Shiqi Mei",
+    "license": "MIT",
+    "devDependencies": {
+      "@types/node": "^20.8.4"
+    }
+  }

@@ -1,3 +1,0 @@
-1. extract web server into seperate modules and be joined `codeindex_restful_apis`
-2. codeindex_grpc_apis
-3. codeindex_webui: monaco-editor & Askcodebase AI

@@ -4,9 +4,6 @@ version = "0.1.0"
 edition = "2021"
 default-run = "codeindex"
 
-[build-dependencies]
-cc = "*"
-
 [dependencies]
 ignore = "0.4.20"
 tree-sitter = "0.20.10"
